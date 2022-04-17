@@ -9,8 +9,11 @@ public class DentonlinePermissionDefinitionProvider : PermissionDefinitionProvid
     public override void Define(IPermissionDefinitionContext context)
     {
         var myGroup = context.AddGroup(DentonlinePermissions.GroupName);
-        //Define your own permissions here. Example:
-        //myGroup.AddPermission(DentonlinePermissions.MyPermission1, L("Permission:MyPermission1"));
+
+        var booksPermission = myGroup.AddPermission(EmployeePermissions.Employees.Default, L("Permission:Employees"));
+        booksPermission.AddChild(EmployeePermissions.Employees.Create, L("Permission:Employees.Create"));
+        booksPermission.AddChild(EmployeePermissions.Employees.Edit, L("Permission:Employees.Edit"));
+        booksPermission.AddChild(EmployeePermissions.Employees.Delete, L("Permission:Employees.Delete"));
     }
 
     private static LocalizableString L(string name)
